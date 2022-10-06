@@ -28,13 +28,17 @@ pipeline{
 
 	stages{
         stage('step getcode') {
+			steps{
 			script{
             	checkout([$class: 'GitSCM', branches: [[name: "${branch}"]], extensions: [], userRemoteConfigs: [[credentialsId: 'a8cdb733-01c2-4786-9f63-338eb4c91c91', url: "${srcUrl}"]]])
+				}
 			}
 		}
         stage('step build') {
+			steps{
 			script{
 				tools.exec(tool_package,command)
+				}
 			}
 		}
 	}
