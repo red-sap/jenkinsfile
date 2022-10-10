@@ -31,7 +31,6 @@ pipeline{
         stage('step getcode') {
 			steps{
 			script{
-				println("${JOB_NAME}","${JOB_NAME}")
             	checkout([$class: 'GitSCM', branches: [[name: "${branch}"]], extensions: [], userRemoteConfigs: [[credentialsId: 'a8cdb733-01c2-4786-9f63-338eb4c91c91', url: "${srcUrl}"]]])
 				}
 			}
@@ -39,7 +38,7 @@ pipeline{
 		stage('step codescan') {
 			steps{
 			script{
-            	tool.PrintMes("代码扫描","green")
+            	tools.PrintMes("代码扫描","green")
 				sonar.SonarScan("${JOB_NAME}","${JOB_NAME}","src")
 				}
 			}
