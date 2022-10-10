@@ -31,6 +31,7 @@ pipeline{
         stage('step getcode') {
 			steps{
 			script{
+				println("${JOB_NAME}","${JOB_NAME}")
             	checkout([$class: 'GitSCM', branches: [[name: "${branch}"]], extensions: [], userRemoteConfigs: [[credentialsId: 'a8cdb733-01c2-4786-9f63-338eb4c91c91', url: "${srcUrl}"]]])
 				}
 			}
