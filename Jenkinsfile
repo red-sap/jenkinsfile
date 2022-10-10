@@ -1,5 +1,6 @@
 @Library("jenkinslib") _ 
 def tools = new org.devops.tools()
+def sonar =new org.devops.sonarqube()
 
 String workspace = "/opt/jenkins/workspace"
 
@@ -31,6 +32,14 @@ pipeline{
 			steps{
 			script{
             	checkout([$class: 'GitSCM', branches: [[name: "${branch}"]], extensions: [], userRemoteConfigs: [[credentialsId: 'a8cdb733-01c2-4786-9f63-338eb4c91c91', url: "${srcUrl}"]]])
+				}
+			}
+		}
+		stage('step codescan') {
+			steps{
+			script{
+            	tool.PrintMes("代码扫描","green")
+				sonar.SonarScan("${JOB_NAME}","${JOB_NAME}","src")
 				}
 			}
 		}
